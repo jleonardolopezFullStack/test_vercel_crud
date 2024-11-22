@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -14,19 +15,16 @@ export const createTask = async (formData: FormData) => {
   if (!name || !description || !framework) return;
   console.log(name, description, framework);
 
-  const { description: _, ...taskWithoutDescription } =
-    await prisma.task.create({
-      data: {
-        name: name,
-        description: description,
-        framework: framework,
-      },
-    });
+  const task = await prisma.task.create({
+    data: {
+      name: name,
+      description: description,
+      framework: framework,
+    },
+  });
 
-  // console.log(taskWithoutDescription);
+  console.log(task);
   redirect("/");
-
-  return taskWithoutDescription;
 };
 
 export const findTask = async () => {

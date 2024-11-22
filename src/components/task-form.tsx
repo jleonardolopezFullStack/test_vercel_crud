@@ -86,9 +86,9 @@ const FormTask = ({ task }: { task: Task }) => {
             <Button
               type="submit"
               onClick={() => {
-                const toasty = task
-                  ? toast.success("task have been edited")
-                  : toast.success("task have been created");
+                toast.success(
+                  task ? "Task have been edited" : "Task have been created"
+                );
               }}
             >
               {task ? "Edit" : "Create"}
