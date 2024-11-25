@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const EditPage = async ({ params }: { params: { id: string } }) => {
+const EditPage = async ({ params }: any) => {
   const task = await prisma.task.findFirst({
     where: { id: parseInt(params.id) },
   });
@@ -11,6 +11,9 @@ const EditPage = async ({ params }: { params: { id: string } }) => {
   if (!task) {
     redirect("/");
   }
+  /*   const params = useParams(); */
+
+  console.log(params.id);
 
   return (
     <div className="flex justify-center items-center h-screen">
