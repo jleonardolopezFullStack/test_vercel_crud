@@ -55,7 +55,10 @@ export const editTask = async (formData: FormData) => {
 };
 
 export const findTaskByID = async (id: string) => {
-  await prisma.task.findFirst({
-    where: { id: parseInt(id) },
+  const task = await prisma.task.findFirst({
+    where: { id: parseInt(id as string) },
   });
+
+  if (!task) return;
+  return task;
 };

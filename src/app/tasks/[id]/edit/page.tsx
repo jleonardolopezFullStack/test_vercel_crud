@@ -10,14 +10,11 @@ const EditPage = async ({
     id: string;
   };
 }) => {
-  const { id } = await params;
+  /*   const task = await findTaskByID(params.id as string); */
   const task = await prisma.task.findFirst({
-    where: { id: parseInt(id as string) },
+    where: { id: parseInt(params.id as string) },
   });
-
   if (!task) return;
-
-  /*   const task: Task = await findTaskByID(params.id as string); */
 
   return (
     <div className="flex justify-center items-center h-screen">
