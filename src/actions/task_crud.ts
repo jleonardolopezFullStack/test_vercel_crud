@@ -53,3 +53,9 @@ export const editTask = async (formData: FormData) => {
 
   redirect("/");
 };
+
+export const findTaskByID = async (id: string) => {
+  await prisma.task.findFirst({
+    where: { id: parseInt(id) },
+  });
+};

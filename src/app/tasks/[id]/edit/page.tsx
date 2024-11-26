@@ -1,19 +1,23 @@
-import FormTask from "@/components/task-form";
-import prisma from "@/lib/prisma";
-import { redirect } from "next/navigation";
 import React from "react";
 
-const EditPage = async ({ params }: any) => {
+import FormTask from "@/components/task-form";
+import prisma from "@/lib/prisma";
+
+const EditPage = async ({
+  params,
+}: {
+  params: {
+    id: string;
+  };
+}) => {
+  const { id } = await params;
   const task = await prisma.task.findFirst({
-    where: { id: parseInt(params.id) },
+    where: { id: parseInt(id as string) },
   });
 
-  if (!task) {
-    redirect("/");
-  }
-  /*   const params = useParams(); */
+  if (!task) return;
 
-  console.log(params.id);
+  /*   const task: Task = await findTaskByID(params.id as string); */
 
   return (
     <div className="flex justify-center items-center h-screen">
